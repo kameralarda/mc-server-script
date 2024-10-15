@@ -1,8 +1,8 @@
 import os
 import subprocess
-from get-paper import get_latest_paper_url
+from get_paper import get_latest_paper_url
 
-# server adında bir klasör oluştur ve o klasöre git
+# server adında bir klasör oluştur ve o klasöre git    
 os.makedirs("server", exist_ok=True)
 os.chdir("server")
 
