@@ -9,6 +9,9 @@ os.chdir("server")
 # get-paper.py dosyasındaki latest_jar_url değişkeninden URL al
 latest_jar_url = get_latest_paper_url()
 
+# URL'den jar dosyasının adını ayıkla
+jar_file_name = latest_jar_url.split('/')[-1]
+
 # paper jar dosyasını wget ile indir
 subprocess.run(["wget", latest_jar_url])
 
@@ -19,7 +22,7 @@ max_ram = input("Maksimum RAM miktarını girin (örn. 4G): ").strip()
 # start.sh dosyasını oluştur ve gerekli komutu ekle
 with open("start.sh", "w") as file:
     file.write("#!/bin/sh\n")
-    file.write(f"java -Xms{min_ram} -Xmx{max_ram} -XX:+UseG1GC -jar paper-1.21.1-122.jar nogui\n")
+    file.write(f"java -Xms{min_ram} -Xmx{max_ram} -XX:+UseG1GC -jar {jar_file_name} nogui\n")
 
 # start.sh dosyasını çalıştırılabilir yap
 subprocess.run(["chmod", "+x", "start.sh"])
