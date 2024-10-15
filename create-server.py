@@ -6,8 +6,8 @@ from get_paper import get_latest_jar_url
 os.makedirs("server", exist_ok=True)
 os.chdir("server")
 
-# get-paper.py dosyasındaki latest_jar_url değişkeninden URL al
-latest_jar_url = get_latest_paper_url()
+# get_paper.py dosyasındaki get_latest_jar_url fonksiyonunu kullanarak URL al
+latest_jar_url = get_latest_jar_url()
 
 # URL'den jar dosyasının adını ayıkla
 jar_file_name = latest_jar_url.split('/')[-1]
@@ -37,9 +37,9 @@ max_players = input("Maksimum oyuncu sayısı kaç olsun?: ").strip()
 
 with open("server.properties", "w") as file:
     if online_mode == "evet":
-        file.write("online-mode=false\n")
+        file.write("online-mode=false\n")  # Korsan sunucu aktif
     else:
-        file.write("online-mode=true\n")
+        file.write("online-mode=true\n")   # Resmi sunucu
     file.write(f"max-players={max_players}\n")
 
 # Sunucu açıklaması ne olsun diye sor ve server.properties dosyasına ekle
@@ -47,5 +47,5 @@ motd = input("Sunucu açıklaması ne olsun?: ").strip()
 with open("server.properties", "a") as file:
     file.write(f"motd={motd}\n")
 
-# start.sh dosyasını çalıştır
-subprocess.run(["./start.sh"])
+# Sunucuyu başlatmak için start.sh dosyasını çalıştır
+subprocess.run(["./start.sh"], check=True)
